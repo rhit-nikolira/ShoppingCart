@@ -23,29 +23,28 @@ public class ItemDb implements Serializable{
         map.put(7, new Item(7, "plastic-cups", 0.99, 3000));
 
         try {
-            File f = new File("itemDataBase.txt");
-            FileOutputStream fileOutput = new FileOutputStream(f);
-            ObjectOutputStream objOutput = new ObjectOutputStream(fileOutput);
-            for(Map.Entry<Integer, Item> entry : map.entrySet()) {
-                objOutput.writeObject(entry.getValue());
-            }
-            objOutput.flush();
-            objOutput.close();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+			File f = new File("itemDatabase.txt");
+			FileOutputStream file = new FileOutputStream(f);
+			ObjectOutputStream out = new ObjectOutputStream(file);
+			for (Map.Entry<Integer, Item> entry : this.map.entrySet()) {
+				out.writeObject(entry.getValue());
+			}
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        try {
-            @SuppressWarnings("resource")
-            ObjectInputStream fileInput = new ObjectInputStream(new FileInputStream("newItemData.txt"));
-            while(true) {
-                Item i = (Item) fileInput.readObject();
-                map.put(i.ID, i);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+		try {
+			@SuppressWarnings("resource")
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("inputItemDatabase.txt"));
+			while (true) {
+				Item i = (Item) in.readObject();
+				this.map.put(i.ID, i);
+			}
+		} catch (FileNotFoundException e) {
+		} catch (IOException | ClassNotFoundException e) {
+		}
+
     }
 }

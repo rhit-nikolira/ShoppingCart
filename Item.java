@@ -1,9 +1,10 @@
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     int ID; 
     String name; 
     double price; 
     int stock; 
-    DiscountCode discount;
 
     public Item(int id, String n, double p, int q) {
         this.ID = id;
@@ -11,20 +12,14 @@ public class Item {
         this.price = p;
         this.stock = q;
     }   
-    public int checkDiscount() {
-        return 0;
-    }
-    public int checkQuantity(int quantity) {
-        if(this.stock >= quantity) 
-            return this.stock - quantity;
-        System.out.println("Error: Insufficient Item stock");
-        return -1;  
+    
+    public boolean checkQuantity(int quantity) {
+        if(this.stock >= quantity)
+            return true; 
+        return false;
     }
     public void setQuantity(int newQuantity) {
         this.stock = newQuantity;
-    }
-    public void setItemDiscount(DiscountCode c) {
-        this.discount = c;
     }
     public int getID() {
         return this.ID;
@@ -34,9 +29,6 @@ public class Item {
     }
     public int getStock() {
         return this.stock;
-    }
-    public DiscountCode getItemDiscount() {
-        return this.discount;
     }
     public String getName() {
         return this.name;
