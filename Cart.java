@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.zip.CheckedInputStream;
 
 public class Cart implements Serializable {
     HashMap<Item, Integer> allItems; //Item -> quantity in cart
